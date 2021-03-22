@@ -4,7 +4,10 @@ import pathlib
 
 whileBool = True
 successfulCommand = False
+requires_saving = False
 graph = nx.Graph()
+figure = None
+filename = None
 
 
 def add_node(raw_input: str):
@@ -58,10 +61,15 @@ def help():
 
 def save_image(raw_input):
     global successfulCommand
+    global figure
+    global requires_saving
     list = raw_input.split(' ')
+    global filename
     if len(list) == 3:
-        plt.savefig(str(pathlib.Path(__file__).parent.absolute()) + '/images/' + list[2] + ".png")
+        filename = list[2]
+        # figure.savefig(str(pathlib.Path(__file__).parent.parent.absolute()) + '/images/' + list[2] + ".png")
         successfulCommand = True
+        requires_saving = True
     else:
         print('Improper command caught in save image: ' + raw_input)
 
@@ -72,10 +80,10 @@ def print_list(raw_input):
     elif 'nodes' in raw_input:
         print(graph.nodes)
     else:
-        print('What is this option?(caught in print): '+raw_input)
+        print('What is this option?(caught in print): ' + raw_input)
 
 
-def add_b_edge(raw_input):
+def add_b_edge(raw_input: str):
     global graph
     global successfulCommand
     list = raw_input.split(' ')
@@ -104,8 +112,7 @@ def add_b_edge(raw_input):
             print('Improper command caught in add bidirectional edge: ' + raw_input)
 
 
-
-def process_raw_input(raw_input):
+def process_raw_input(raw_input: str):
     global whileBool
     if 'help' in raw_input:
         help()
@@ -136,6 +143,7 @@ def process_graph_type(graphType):
     else:
         graph = nx.Graph()
 
+
 graphType = input('Please specify graph type(graph/digraph): >>')
 process_graph_type(graphType)
 while whileBool:
@@ -150,5 +158,8 @@ while whileBool:
                          with_labels=True)
         plt.ion()
         plt.pause(0.001)
+        if requires_saving:
+            requires_saving = False
+            plt.savefig(str(pathlib.Path(__file__).parent.parent.absolute()) + '/images/'+filename+'.png')
         plt.show()
         plt.clf()
