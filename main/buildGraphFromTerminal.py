@@ -1,13 +1,14 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import pathlib
+import datetime
 
 whileBool = True
 successfulCommand = False
 requires_saving = False
 graph = nx.Graph()
 figure = None
-filename = None
+filename = ''
 
 
 def add_node(raw_input: str):
@@ -80,6 +81,8 @@ def print_list(raw_input):
     elif 'nodes' in raw_input:
         print(graph.nodes)
     else:
+        print(graph.nodes.keys())
+        print(graph.nodes.values())
         print('What is this option?(caught in print): ' + raw_input)
 
 
@@ -156,10 +159,14 @@ while whileBool:
                          node_color='red',
                          node_size=1000,
                          with_labels=True)
+        # labels = nx.get_edge_attributes(graph, 'weight')
+        # nx.draw_networkx_edge_labels(graph, edge_labels=labels)
         plt.ion()
         plt.pause(0.001)
         if requires_saving:
             requires_saving = False
-            plt.savefig(str(pathlib.Path(__file__).parent.parent.absolute()) + '/images/'+filename+'.png')
+            now = datetime.datetime.now()
+            plt.savefig(str(pathlib.Path(__file__).parent.parent.absolute()) + '/images/' + filename + now.strftime(
+                "-%m/%d/%Y-%H:%M:%S-") + '.png')
         plt.show()
         plt.clf()
