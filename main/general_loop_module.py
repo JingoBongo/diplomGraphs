@@ -1,66 +1,92 @@
-import networkx as nx
-import matplotlib.pyplot as plt
-import pathlib
-import datetime
+import settings as s
+import general_draw_module as dm
 
-whileBool = True
-successfulCommand = False
-requires_saving = False
-graph = nx.Graph()
-# figure = None
-# filename = ''
 
-def process_graph_type(graphType):
-    global graph
-    if 'digraph' in graphType:
-        graph = nx.DiGraph()
-    else:
-        graph = nx.Graph()
+
+
 
 def process_raw_input(raw_input: str):
-    global whileBool
     if 'help' in raw_input:
         help()
     elif 'add node' in raw_input:
-        add_node(raw_input)
+        dm.add_node(raw_input)
     elif 'add edge' in raw_input:
-        add_edge(raw_input)
+        dm.add_edge(raw_input)
     elif 'add bidirectional edge' in raw_input:
-        add_b_edge(raw_input)
+        dm.add_b_edge(raw_input)
     elif 'reset plot' in raw_input:
-        reset_plot()
+        dm.reset_plot()
     elif 'save image' in raw_input:
-        save_image(raw_input)
+        dm.save_image(raw_input)
+    elif 'save json' in raw_input:
+        dm.save_json(raw_input)
+    elif 'save gexf' in raw_input:
+        dm.save_gexf(raw_input)
+    elif 'import json' in raw_input:
+        dm.import_json(raw_input)
+    elif 'import gexf' in raw_input:
+        dm.import_gexf(raw_input)
     elif 'print' in raw_input:
-        print_list(raw_input)
+        dm.print_list(raw_input)
     elif 'exit' in raw_input:
-        whileBool = False
+        s.whileBool = False
         print('Closing everything')
-        plt.close()
+        s.plt.close()
     else:
         print('Command not recognized: ' + raw_input)
 
+def help():
+    print('commands are:')
+    print('add node [node_name] (possible node weight)')
+    print('add edge [1st node name] [2nd node name] (possible edge weight)')
+    if '.DiGraph' in str(type(s.graph)):
+        print('add bidirectional edge [1st node name] [2nd node name] (possible edge weight)')
+    print('reset plot')
+    print('help')
+    print('save image [image name]')
+    print('exit')
+
+
 def main_loop():
-    graphType = input('Please specify graph type(graph/digraph): >>')
-    process_graph_type(graphType)
-    while whileBool:
+    graph_type = input('Please specify graph type(graph/digraph): >>')
+    dm.process_graph_type(graph_type)
+    while s.whileBool:
         print('Enter command. \'help\' for help')
         raw_input = input('>>')
         process_raw_input(raw_input)
-        if successfulCommand:
-            successfulCommand = False
-            nx.draw_circular(graph,
-                             node_color='red',
-                             node_size=1000,
-                             with_labels=True)
+        if s.successfulCommand:
+            s.successfulCommand = False
+
+            # // replace with proper draw command
+            # s.nx.draw_circular(s.graph,
+            #                  node_color='red',
+            #                  node_size=1000,
+            #                  with_labels=True)
+
+            dm.draw_graph()
+
+
             # labels = nx.get_edge_attributes(graph, 'weight')
             # nx.draw_networkx_edge_labels(graph, edge_labels=labels)
-            plt.ion()
-            plt.pause(0.001)
-            if requires_saving:
-                requires_saving = False
-                now = datetime.datetime.now()
-                plt.savefig(str(pathlib.Path(__file__).parent.parent.absolute()) + '/images/' + filename + now.strftime(
-                    "-%m/%d/%Y-%H:%M:%S-") + '.png')
-            plt.show()
-            plt.clf()
+            s.plt.ion()
+            s.plt.pause(0.001)
+            if s.requires_saving:
+                s.requires_saving = False
+                now = s.datetime.datetime.now()
+                file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\images\\' + s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.png'
+                s.plt.savefig(file_plus_path)
+            if s.requires_saving_json:
+                s.requires_saving_json = False
+                now = s.datetime.datetime.now()
+                file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\saved_graphs\\' + s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.json'
+                f = open(file_plus_path, 'a')
+                f.write(s.json.dumps(s.json_graph.node_link_data(s.graph)))
+                f.close()
+            if s.requires_saving_gexf:
+                s.requires_saving_gexf = False
+                now = s.datetime.datetime.now()
+                file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\saved_graphs\\' + s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.gexf'
+                s.nx.write_gexf(s.graph, file_plus_path)
+            # add bool to check for show or not
+            s.plt.show()
+            s.plt.clf()

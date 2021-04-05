@@ -166,7 +166,6 @@ while whileBool:
         if requires_saving:
             requires_saving = False
             now = datetime.datetime.now()
-            plt.savefig(str(pathlib.Path(__file__).parent.parent.absolute()) + '/images/' + filename + now.strftime(
-                "-%m/%d/%Y-%H:%M:%S-") + '.png')
+            plt.savefig(str(pathlib.Path(__file__).parent.parent.absolute()) + '/images/' + filename + now.strftime("-%m/%d/%Y-%H:%M:%S-") + '.png')
         plt.show()
         plt.clf()
