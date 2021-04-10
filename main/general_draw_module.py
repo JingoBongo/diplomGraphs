@@ -86,6 +86,26 @@ def add_edge(raw_input: str):
         print('Improper command caught in add edge: ' + raw_input)
 
 
+def remove_edge(raw_input: str):
+    #    remove edge x1 x2
+    list = raw_input.split(' ')
+    if len(list) == 4:
+        s.graph.remove_edge(list[2], list[3])
+        s.successfulCommand = True
+    else:
+        print('Improper command caught in remove edge: ' + raw_input)
+
+
+def remove_node(raw_input: str):
+    #    remove node x1
+    list = raw_input.split(' ')
+    if len(list) == 3:
+        s.graph.remove_node(list[2])
+        s.successfulCommand = True
+    else:
+        print('Improper command caught in remove node: ' + raw_input)
+
+
 def reset_plot():
     # global successfulCommand
     # global graph
@@ -152,6 +172,10 @@ def draw_graph():
     nd_labels = s.nx.get_node_attributes(s.graph, 'name')
     s.nx.draw_networkx_edge_labels(s.graph, pos, edge_labels=labels)
     s.nx.draw_networkx_labels(s.graph, pos, labels=nd_labels)
+    # test feature to get fullscreen
+    mng = s.plt.get_current_fig_manager()
+    if mng.window.state != 'zoomed':
+        mng.window.state('zoomed')
 
 
 def import_json(raw_input):

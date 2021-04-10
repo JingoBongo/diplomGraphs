@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2021-04-09">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes class="node" mode="static">
+      <attribute id="0" title="color" type="string" />
+      <attribute id="1" title="name" type="string" />
+    </attributes>
+    <nodes>
+      <node id="a1" label="a1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a1" />
+        </attvalues>
+      </node>
+      <node id="a2" label="a2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a2" />
+        </attvalues>
+      </node>
+      <node id="a3" label="a3">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a3" />
+        </attvalues>
+      </node>
+      <node id="a4" label="a4">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a4" />
+        </attvalues>
+      </node>
+      <node id="a5" label="a5">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a5" />
+        </attvalues>
+      </node>
+      <node id="a6" label="a6">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a6" />
+        </attvalues>
+      </node>
+      <node id="a7" label="a7">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a7" />
+        </attvalues>
+      </node>
+      <node id="b6" label="b6">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b6" />
+        </attvalues>
+      </node>
+      <node id="b7" label="b7">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b7" />
+        </attvalues>
+      </node>
+      <node id="b1" label="b1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b1" />
+        </attvalues>
+      </node>
+      <node id="b2" label="b2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b2" />
+        </attvalues>
+      </node>
+      <node id="b3" label="b3">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b3" />
+        </attvalues>
+      </node>
+      <node id="b4" label="b4">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b4" />
+        </attvalues>
+      </node>
+      <node id="b5" label="b5">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b5" />
+        </attvalues>
+      </node>
+      <node id="c1" label="c1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="c1" />
+        </attvalues>
+      </node>
+      <node id="c2" label="c2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="c2" />
+        </attvalues>
+      </node>
+      <node id="c3" label="c3">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="c3" />
+        </attvalues>
+      </node>
+      <node id="c4" label="c4">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="c4" />
+        </attvalues>
+      </node>
+      <node id="c5" label="c5">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="c5" />
+        </attvalues>
+      </node>
+      <node id="c6" label="c6">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="c6" />
+        </attvalues>
+      </node>
+      <node id="c7" label="c7">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="c7" />
+        </attvalues>
+      </node>
+      <node id="d6" label="d6">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="d6" />
+        </attvalues>
+      </node>
+      <node id="d7" label="d7">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="d7" />
+        </attvalues>
+      </node>
+      <node id="d1" label="d1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="d1" />
+        </attvalues>
+      </node>
+      <node id="d2" label="d2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="d2" />
+        </attvalues>
+      </node>
+      <node id="d3" label="d3">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="d3" />
+        </attvalues>
+      </node>
+      <node id="d4" label="d4">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="d4" />
+        </attvalues>
+      </node>
+      <node id="d5" label="d5">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="d5" />
+        </attvalues>
+      </node>
+      <node id="e1" label="e1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="e1" />
+        </attvalues>
+      </node>
+      <node id="e2" label="e2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="e2" />
+        </attvalues>
+      </node>
+      <node id="e3" label="e3">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="e3" />
+        </attvalues>
+      </node>
+      <node id="e4" label="e4">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="e4" />
+        </attvalues>
+      </node>
+      <node id="e5" label="e5">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="e5" />
+        </attvalues>
+      </node>
+      <node id="e6" label="e6">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="e6" />
+        </attvalues>
+      </node>
+      <node id="e7" label="e7">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="e7" />
+        </attvalues>
+      </node>
+      <node id="f1" label="f1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="f1" />
+        </attvalues>
+      </node>
+      <node id="g1" label="g1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="g1" />
+        </attvalues>
+      </node>
+      <node id="f2" label="f2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="f2" />
+        </attvalues>
+      </node>
+      <node id="f2f3" label="f2f3">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="f2f3" />
+        </attvalues>
+      </node>
+      <node id="6" label="6">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="6" />
+        </attvalues>
+      </node>
+      <node id="f3" label="f3">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="f3" />
+        </attvalues>
+      </node>
+      <node id="f4" label="f4">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="f4" />
+        </attvalues>
+      </node>
+      <node id="f5" label="f5">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="f5" />
+        </attvalues>
+      </node>
+      <node id="f6" label="f6">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="f6" />
+        </attvalues>
+      </node>
+      <node id="f7" label="f7">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="f7" />
+        </attvalues>
+      </node>
+      <node id="g2" label="g2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="g2" />
+        </attvalues>
+      </node>
+      <node id="" label="">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="" />
+        </attvalues>
+      </node>
+      <node id="g3" label="g3">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="g3" />
+        </attvalues>
+      </node>
+      <node id="g4" label="g4">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="g4" />
+        </attvalues>
+      </node>
+      <node id="g5" label="g5">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="g5" />
+        </attvalues>
+      </node>
+      <node id="g6" label="g6">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="g6" />
+        </attvalues>
+      </node>
+      <node id="g7" label="g7">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="g7" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" source="a1" target="a2" weight="12" />
+      <edge id="1" source="a2" target="a3" weight="11" />
+      <edge id="2" source="a2" target="b1" weight="11" />
+      <edge id="3" source="a3" target="a4" weight="10" />
+      <edge id="4" source="a3" target="b2" weight="11" />
+      <edge id="5" source="a5" target="a6" weight="7" />
+      <edge id="6" source="a5" target="b5" weight="7" />
+      <edge id="7" source="a6" target="b6" weight="6" />
+      <edge id="8" source="a7" target="b6" weight="6" />
+      <edge id="9" source="a7" target="b7" weight="6" />
+      <edge id="10" source="b6" target="b5" weight="7" />
+      <edge id="11" source="b6" target="b7" weight="6" />
+      <edge id="12" source="b6" target="c6" weight="6" />
+      <edge id="13" source="b1" target="b2" weight="10" />
+      <edge id="14" source="b1" target="c1" weight="10" />
+      <edge id="15" source="b2" target="b3" weight="10" />
+      <edge id="16" source="b2" target="c2" weight="10" />
+      <edge id="17" source="b3" target="b4" weight="10" />
+      <edge id="18" source="b3" target="c3" weight="10" />
+      <edge id="19" source="b3" target="c4" weight="9" />
+      <edge id="20" source="b4" target="b5" weight="8" />
+      <edge id="21" source="b4" target="c4" weight="9" />
+      <edge id="22" source="b5" target="c5" weight="7" />
+      <edge id="23" source="c1" target="c2" weight="9" />
+      <edge id="24" source="c1" target="d1" weight="8" />
+      <edge id="25" source="c2" target="c3" weight="9" />
+      <edge id="26" source="c2" target="d2" weight="8" />
+      <edge id="27" source="c3" target="c4" weight="9" />
+      <edge id="28" source="c3" target="d3" weight="8" />
+      <edge id="29" source="c3" target="d4" weight="9" />
+      <edge id="30" source="c4" target="c5" weight="8" />
+      <edge id="31" source="c4" target="d4" weight="9" />
+      <edge id="32" source="c5" target="c6" weight="7" />
+      <edge id="33" source="c5" target="d5" weight="7" />
+      <edge id="34" source="c6" target="d6" weight="6" />
+      <edge id="35" source="c7" target="d6" weight="6" />
+      <edge id="36" source="c7" target="d7" weight="5" />
+      <edge id="37" source="d6" target="d5" weight="7" />
+      <edge id="38" source="d6" target="d7" weight="6" />
+      <edge id="39" source="d6" target="e6" weight="6" />
+      <edge id="40" source="d1" target="d2" weight="8" />
+      <edge id="41" source="d1" target="e1" weight="7" />
+      <edge id="42" source="d2" target="d3" weight="8" />
+      <edge id="43" source="d2" target="e2" weight="7" />
+      <edge id="44" source="d3" target="d4" weight="8" />
+      <edge id="45" source="d3" target="e3" weight="7" />
+      <edge id="46" source="d4" target="d5" weight="8" />
+      <edge id="47" source="d4" target="e4" weight="8" />
+      <edge id="48" source="d5" target="e5" weight="7" />
+      <edge id="49" source="d5" target="e6" weight="7" />
+      <edge id="50" source="e1" target="e2" weight="7" />
+      <edge id="51" source="e1" target="f1" weight="6" />
+      <edge id="52" source="e2" target="e3" weight="7" />
+      <edge id="53" source="e2" target="f2" weight="6" />
+      <edge id="54" source="e3" target="e4" weight="7" />
+      <edge id="55" source="e4" target="e5" weight="7" />
+      <edge id="56" source="e4" target="f4" weight="6" />
+      <edge id="57" source="e5" target="e6" weight="7" />
+      <edge id="58" source="e6" target="e7" weight="6" />
+      <edge id="59" source="e6" target="f6" weight="6" />
+      <edge id="60" source="e7" target="f7" weight="5" />
+      <edge id="61" source="f1" target="g1" weight="5" />
+      <edge id="62" source="g1" target="g2" weight="5" />
+      <edge id="63" source="f2" target="f3" weight="6" />
+      <edge id="64" source="f2" target="g2" weight="5" />
+      <edge id="65" source="f2f3" target="6" weight="0" />
+      <edge id="66" source="f3" target="g3" weight="6" />
+      <edge id="67" source="f4" target="f5" weight="6" />
+      <edge id="68" source="f5" target="g5" weight="5" />
+      <edge id="69" source="f6" target="f7" weight="7" />
+      <edge id="70" source="f6" target="g6" weight="5" />
+      <edge id="71" source="" target="" weight="0" />
+      <edge id="72" source="g3" target="g4" weight="5" />
+      <edge id="73" source="g6" target="g7" weight="5" />
+    </edges>
+  </graph>
+</gexf>

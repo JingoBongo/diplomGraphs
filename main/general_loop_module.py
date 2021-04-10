@@ -1,5 +1,6 @@
 import settings as s
 import general_draw_module as dm
+import general_alg_module as am
 
 
 
@@ -12,6 +13,10 @@ def process_raw_input(raw_input: str):
         dm.add_node(raw_input)
     elif 'add edge' in raw_input:
         dm.add_edge(raw_input)
+    elif 'remove node' in raw_input:
+        dm.remove_node(raw_input)
+    elif 'remove edge' in raw_input:
+        dm.remove_edge(raw_input)
     elif 'add bidirectional edge' in raw_input:
         dm.add_b_edge(raw_input)
     elif 'reset plot' in raw_input:
@@ -28,6 +33,8 @@ def process_raw_input(raw_input: str):
         dm.import_gexf(raw_input)
     elif 'print' in raw_input:
         dm.print_list(raw_input)
+    elif 'floyd' in raw_input:
+        am.dum_dum_floyd_alg(s.graph)
     elif 'exit' in raw_input:
         s.whileBool = False
         print('Closing everything')
@@ -39,6 +46,8 @@ def help():
     print('commands are:')
     print('add node [node_name] (possible node weight)')
     print('add edge [1st node name] [2nd node name] (possible edge weight)')
+    print('remove node [node name]')
+    print('remove edge [1st node name] [2nd node name]')
     if '.DiGraph' in str(type(s.graph)):
         print('add bidirectional edge [1st node name] [2nd node name] (possible edge weight)')
     print('reset plot')
