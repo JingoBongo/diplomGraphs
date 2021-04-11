@@ -9,8 +9,6 @@ def process_graph_type(graph_type):
 
 
 def add_b_edge(raw_input: str):
-    # global graph
-    # global successfulCommand
     list = raw_input.split(' ')
     if '.DiGraph' in str(type(s.graph)):
         if len(list) == 7:
@@ -53,8 +51,6 @@ def add_b_edge(raw_input: str):
 
 
 def add_node(raw_input: str):
-    # global graph
-    # global successfulCommand
     list = raw_input.split(' ')
     if len(list) == 4:
         s.graph.add_node(list[2], weight=list[3], color='red', name=list[2])
@@ -67,8 +63,6 @@ def add_node(raw_input: str):
 
 
 def add_edge(raw_input: str):
-    # global graph
-    # global successfulCommand
     list = raw_input.split(' ')
     if len(list) == 5:
         # first, add nodes with corresponding parameters
@@ -107,8 +101,6 @@ def remove_node(raw_input: str):
 
 
 def reset_plot():
-    # global successfulCommand
-    # global graph
     s.successfulCommand = True
     g_type = input('Please specify graph type(graph/digraph): >>')
     process_graph_type(g_type)
@@ -180,8 +172,8 @@ def draw_graph():
 
 def import_json(raw_input):
     list = raw_input.split(' ')
-    if len(list) == 3:
-        filename = list[2]
+    if len(list) == 2:
+        filename = list[1]
         f = open(filename)
         s.graph = s.json_graph.node_link_graph(s.json.load(f))
         f.close()
@@ -192,9 +184,38 @@ def import_json(raw_input):
 
 def import_gexf(raw_input):
     list = raw_input.split(' ')
-    if len(list) == 3:
-        filename = list[2]
+    if len(list) == 2:
+        filename = list[1]
         s.graph = s.nx.read_gexf(filename)
         s.successfulCommand = True
     else:
         print('Improper command caught in import gexf: ' + raw_input)
+
+
+def change_node_color(raw_input):  # change0 node1 color2 [nodename]3 [color]4
+    list = raw_input.split(' ')
+    if len(list) == 5:
+        try:
+            s.graph.nodes[list[3]]['color'] = list[4]
+            s.successfulCommand = True
+        except Exception as e:
+            print('Something went wrong while assigning node color, please make sure such node or color exists')
+    else:
+        print('Improper command caught in change node color: ' + raw_input)
+
+
+# def plot_enabler(raw_input):  # disable plot / enable plot
+#     list = raw_input.split(' ')
+#     if len(list) == 2:
+#         if 'disable plot' == raw_input:
+#             s.draw_plot = False
+#             s.successfulCommand = True
+#         elif 'enable plot' == raw_input:
+#             s.draw_plot = True
+#             s.successfulCommand = True
+#         else:
+#             print('Improper command caught in enable/disable plot: ' + raw_input)
+#     else:
+#         print('Improper command caught in enable/disable plot: ' + raw_input)
+# idk why it doesnt work now. maybe because of pause, but i cant deal with it other way
+

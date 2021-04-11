@@ -10,6 +10,7 @@ successfulCommand = False
 requires_saving = False
 requires_saving_json = False
 requires_saving_gexf = False
+draw_plot = True
 graph = nx.Graph()
 figure = None
 filename = ''
