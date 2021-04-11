@@ -11,6 +11,8 @@ def process_raw_input(raw_input: str):
         help()
     elif 'add node' in raw_input:
         dm.add_node(raw_input)
+    elif 'drawstyle' in raw_input:
+        dm.define_draw_style(raw_input)
     elif 'add edge' in raw_input:
         dm.add_edge(raw_input)
     elif 'remove node' in raw_input:
@@ -72,6 +74,7 @@ def help():
     print('import [path(if not from .py file folder) + filename] ; I accept .gexf and .json')
     print('floyd')
     print('shmoys [warehouse amount] [initial radius] [initial node name, use None for random]')
+    print('drawstyle [style]. Acceptable styles are: planar/default, shell, spring, spectral, random, circular') # kamada_kawai, out temporarily
     print('exit')
 
 

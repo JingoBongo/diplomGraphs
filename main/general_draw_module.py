@@ -154,11 +154,38 @@ def print_list(raw_input):
         print('What is this option?(caught in print): ' + raw_input)
 
 
+def define_draw_style(raw_input):
+    list = raw_input.split(' ')
+    if len(list) == 2:
+        s.draw_style = list[1]
+        s.successfulCommand = True
+    else:
+        print('Improper command caught in drawstyle: ' + raw_input)
+
+
 def draw_graph():
     colors = [s.graph.nodes[a].get('color', 'red') for a in s.graph.nodes]
     # please tell me why exactly colors work this way, but weights not
     # and why the way weight work colors don't want to?!
-    pos = s.nx.planar_layout(s.graph)
+
+    if s.draw_style == 'default' or s.draw_style == 'planar':
+        pos = s.nx.planar_layout(s.graph)
+    elif s.draw_style == 'shell':
+        pos = s.nx.shell_layout(s.graph)
+    elif s.draw_style == 'spring':
+        pos = s.nx.spring_layout(s.graph)
+    elif s.draw_style == 'spectral':
+        pos = s.nx.spectral_layout(s.graph)
+    elif s.draw_style == 'random':
+        pos = s.nx.random_layout(s.graph)
+    # elif s.draw_style == 'kamada_kawai': # doesnt work right now, it needs distances (ex.: https://github.com/RasaHQ/whatlies/issues/9)
+    #     pos = s.nx.kamada_kawai_layout(s.graph)
+    elif s.draw_style == 'circular':
+        pos = s.nx.circular_layout(s.graph)
+    else:
+        print('Hard switch to planar. What is this draw style? '+s.draw_style+'; Please define a valid one (see help).')
+        pos = s.nx.planar_layout(s.graph)
+
     s.nx.draw(s.graph, pos, node_color=colors)
     labels = s.nx.get_edge_attributes(s.graph, 'weight')
     nd_labels = s.nx.get_node_attributes(s.graph, 'name')

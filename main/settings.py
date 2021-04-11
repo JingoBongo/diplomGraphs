@@ -13,4 +13,5 @@ requires_saving_gexf = False
 draw_plot = True
 graph = nx.Graph()
 figure = None
+draw_style = 'planar'
 filename = ''
