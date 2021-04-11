@@ -35,6 +35,15 @@ def process_raw_input(raw_input: str):
         dm.print_list(raw_input)
     elif 'floyd' in raw_input:
         am.dum_dum_floyd_alg(s.graph)
+    # elif 'init1' in raw_input:
+    #     method_to_call = getattr(am, str(raw_input.split(' ')[1]))
+    #     result = method_to_call(raw_input.split(' ')[2])
+    # elif 'init2' in raw_input:
+    #     method_to_call = getattr(am, str(raw_input.split(' ')[1]))
+    #     result = method_to_call(raw_input.split(' ')[2], raw_input.split(' ')[3])
+    elif 'init3' in raw_input:
+        method_to_call = getattr(am, str(raw_input.split(' ')[1]))
+        result = method_to_call(raw_input.split(' ')[2], raw_input.split(' ')[3], raw_input.split(' ')[4])
     elif 'exit' in raw_input:
         s.whileBool = False
         print('Closing everything')
