@@ -11,10 +11,14 @@ def process_raw_input(raw_input: str):
         help()
     elif 'add node' in raw_input:
         dm.add_node(raw_input)
+    elif 'add pnode' in raw_input:
+        dm.add_posed_node(raw_input)
     elif 'drawstyle' in raw_input:
         dm.define_draw_style(raw_input)
     elif 'add edge' in raw_input:
         dm.add_edge(raw_input)
+    elif 'set npos' in raw_input:
+        dm.set_node_pos(raw_input)
     elif 'remove node' in raw_input:
         dm.remove_node(raw_input)
     elif 'remove edge' in raw_input:
@@ -29,11 +33,40 @@ def process_raw_input(raw_input: str):
         dm.save_json(raw_input)
     elif 'save gexf' in raw_input:
         dm.save_gexf(raw_input)
+    elif 'pause' in raw_input: # this allows us to return to working plot
+        s.plt.clf()
+        dm.gui()
+        dm.draw_graph()
+        s.plt.show(block=True) # this alone can bring me back to plot when its closed
+    # elif 'play' in raw_input:
+    #     # s.plt.ion()
+    #     s.plt.show(block=False)
+    elif 'ion' in raw_input: # currently brings back
+        s.plt.show()
+        s.plt.ion()
+    elif 'ioff' in raw_input:
+        s.plt.ioff()
+    elif 'draw' in raw_input:
+        dm.draw_graph()
+    elif 'show' in raw_input:
+        s.plt.show()
+    elif 'freeze' in raw_input: # this really works if we want just the visuals while coding
+        s.plt.clf()
+        dm.draw_graph()
+        s.plt.show()
+        s.plt.ion()
+        s.plt.pause(0.001)
+    elif 'keepalive' in raw_input:
+        s.plt.show()
+        s.plt.ion()
+        s.plt.pause(0.001)
     elif 'import' in raw_input:
         if '.json' in raw_input:
             dm.import_json(raw_input)
         elif '.gexf' in raw_input:
             dm.import_gexf(raw_input)
+        elif '.png' in raw_input:
+            dm.import_png(raw_input)
         else:
             print('What is the file format from command? I accept .gexf and .json: '+str(raw_input))
     elif 'change node color' in raw_input:
@@ -79,6 +112,8 @@ def help():
 
 
 def main_loop():
+    # dm.init_plot()
+    dm.gui()
     graph_type = input('Please specify graph type(graph/digraph): >>')
     dm.process_graph_type(graph_type)
     while s.whileBool:
@@ -87,7 +122,9 @@ def main_loop():
         process_raw_input(raw_input)
         if s.successfulCommand:
             s.successfulCommand = False
+            s.plt.clf()
             dm.draw_graph()
+            s.plt.show()
             s.plt.ion()
             s.plt.pause(0.001)
             if s.requires_saving:
@@ -121,7 +158,7 @@ def main_loop():
             # else:
             #     s.plt.ioff()
             # this part is in maintenance
-            s.plt.clf()
+
 
 
 

@@ -39,7 +39,7 @@ def dum_dum_floyd_alg():
         if summ == minimal_sum:
             min_sum_name = name
     print(name + ' with a sum of ' + str(minimal_sum))
-    s.graph.nodes[name]['color'] = 'green'
+    s.graph.nodes[name]['color'] = s.default_wh_color
     s.successfulCommand = True
 
 
@@ -88,7 +88,7 @@ def dum_dum_shmoys(wh_max_number, init_radius, f_node):
     else:
         print('dum_dum_shmoys: function execution completed with radius = ' + str(init_radius))
         for nd in all_warehouses:
-            s.graph.nodes[nd]['color'] = 'green'
+            s.graph.nodes[nd]['color'] = s.default_wh_color
         s.successfulCommand = True
 
 

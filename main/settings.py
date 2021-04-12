@@ -4,6 +4,7 @@ import pathlib
 import datetime
 import json
 from networkx.readwrite import json_graph
+from matplotlib.widgets import Button
 
 whileBool = True
 successfulCommand = False
@@ -15,3 +16,8 @@ graph = nx.Graph()
 figure = None
 draw_style = 'planar'
 filename = ''
+default_node_color = 'blue'
+default_wh_color = 'green'
+generic_node_name = 'N'
+generic_node_name_counter = 0
+background_img = None
