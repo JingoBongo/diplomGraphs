@@ -1,0 +1,1 @@
+{"directed": false, "multigraph": false, "graph": {}, "nodes": [{"color": "yellow", "name": "a", "pos": "-1.b-0.33333333", "id": "a"}, {"color": "yellow", "name": "b", "pos": "1.b-0.33333333", "id": "b"}, {"color": "yellow", "name": "c", "pos": "0.b0.66666667", "id": "c"}], "links": []}
