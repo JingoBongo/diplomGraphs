@@ -22,7 +22,17 @@ def process_raw_input(raw_input: str):
     #     dm.set_node_name(raw_input)
     elif 'set edge weight' in raw_input:
         dm.set_edge_weight(raw_input)
-    elif 'set weight proportion' in raw_input:
+    elif 'convert' in raw_input:
+        dm.convert(raw_input)
+    elif 'get node dist' in raw_input:
+        dm.get_node_dist(raw_input)
+    elif 'get dist' in raw_input: # 0get 1dist 2x1 3y1 4x2 5y2
+        gda = raw_input.split(' ')
+        if len(gda) == 5:
+            dm.get_dist_between_two_points(gda[2], gda[3], gda[4], gda[5])
+        else:
+            print('improper command when getting dist from x1, y1, x2, y2')
+    elif 'set weight proportion' in raw_input: # set weight proportion u v xxxMetres
         dm.set_weight_proportion(raw_input)
     elif 'remove node' in raw_input:
         dm.remove_node(raw_input)
@@ -45,9 +55,6 @@ def process_raw_input(raw_input: str):
         dm.gui()
         dm.draw_graph()
         s.plt.show(block=True)  # this alone can bring me back to plot when its closed
-    # elif 'play' in raw_input:
-    #     # s.plt.ion()
-    #     s.plt.show(block=False)
     elif 'ion' in raw_input:  # currently brings back
         s.plt.show()
         s.plt.ion()
@@ -60,10 +67,6 @@ def process_raw_input(raw_input: str):
     elif 'freeze' in raw_input:  # this really works if we want just the visuals while coding
         s.plt.clf()
         dm.draw_graph()
-        s.plt.show()
-        s.plt.ion()
-        s.plt.pause(0.001)
-    elif 'keepalive' in raw_input:
         s.plt.show()
         s.plt.ion()
         s.plt.pause(0.001)

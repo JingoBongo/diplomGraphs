@@ -62,11 +62,11 @@ def add_node(raw_input: str):
         print('Improper command caught in add node: ' + raw_input)
 
 
-def show_edge_weights(raw_input: str): # show0 weights1 on/off2
+def show_edge_weights(raw_input: str):  # show0 weights1 on/off2
     list = raw_input.split(' ')
     if len(list) == 3:
         if list[2] == 'on':
-           s.show_weight_labels = True
+            s.show_weight_labels = True
         else:
             s.show_weight_labels = False
     else:
@@ -84,6 +84,20 @@ def add_posed_node(raw_input: str):
         s.successfulCommand = True
     else:
         print('Improper command caught in add node: ' + raw_input)
+
+
+def convert(raw_input: str): # convert0 dist/metr1 500_2
+    list = raw_input.split(' ')
+    # (prop_m * edge dist) / prop_d
+    if len(list) == 3:
+        if 'dist' in raw_input:
+            metrics = float(s.prop_m * float(list[2]) / float(s.prop_d))
+            print('it corresponds to '+str(metrics)+ ' '+str(s.prop_m_suffix))
+        else:
+            dist = float(s.prop_d * float(list[2]) / float(s.prop_m))
+            print('it corresponds to '+str(dist))
+    else:
+        print('Improper command caught in converting values: ' + raw_input)
 
 
 def set_node_pos(raw_input: str):
@@ -114,7 +128,7 @@ def set_node_pos(raw_input: str):
 #         print('Improper command caught in set node pos: ' + raw_input)
 
 
-def set_edge_weight(raw_input: str): # set0 edge1 weight2 u3 v4 weight5
+def set_edge_weight(raw_input: str):  # set0 edge1 weight2 u3 v4 weight5
     list = raw_input.split(' ')  # edge = ('n0', 'n1')  [round(float(loc_arr[0]), 4), round(float(loc_arr[1]), 4)]
     if len(list) == 6:
         try:
@@ -126,23 +140,61 @@ def set_edge_weight(raw_input: str): # set0 edge1 weight2 u3 v4 weight5
         print('Improper command caught in set weight: ' + raw_input)
 
 
-def set_weight_proportion(raw_input: str): # set0 weight1 proportion2 u3 v4 xxxKm5
-    list = raw_input.split(' ') # edge = ('n0', 'n1')
-    if len(list) == 6:
+def get_node_dist(raw_input: str):
+    list = raw_input.split(' ')  # get0 node1 dist3 u4 v5
+    if len(list) == 5:
         try:
-            w = s.graph[str(list[3])][str(list[4])]['weight']
             pos1 = s.graph.nodes[str(list[3])]['pos']
             pos1x = float(str(pos1).split(';')[0])
             pos1y = float(str(pos1).split(';')[1])
             pos2 = s.graph.nodes[str(list[4])]['pos']
             pos2x = float(str(pos2).split(';')[0])
             pos2y = float(str(pos2).split(';')[1])
-            x1 = pos1x - pos2x
-            y1 = pos1y - pos2y
-            dist = round(s.math.sqrt(x1*x1 + y1*y1), 4)
-            print('distance '+str(list[5]) + ' of weight '+str(w)+' corresponds to '+str(dist)+' distance in on the map.')
+            s.distance_out_loud = True
+            get_dist_between_two_points(pos1x, pos1y, pos2x, pos2y)
+        except Exception as e:
+            print('Something went wrong while getting node positions')
+            print()
+    else:
+        print('Improper command caught in get node dist: ' + raw_input)
 
-            s.successfulCommand = True
+
+def get_dist_between_two_points(x1, y1, x2, y2):
+    pos1x = float(str(x1))
+    pos1y = float(str(y1))
+    pos2x = float(str(x2))
+    pos2y = float(str(y2))
+    x = pos1x - pos2x
+    y = pos1y - pos2y
+    dist = round(s.math.sqrt(x * x + y * y), 4)
+    metrics = float(float(s.prop_m) * float(dist) / float(s.prop_d))
+    if s.distance_out_loud:
+        print('Distance between 2 points: ' + str(dist)+'; or '+str(metrics)+' '+str(s.prop_m_suffix))
+        s.distance_out_loud = False
+    return dist
+
+
+def set_weight_proportion(raw_input: str):  # set0 weight1 proportion2 u3 v4 xxxKm5
+    list = raw_input.split(' ')  # edge = ('n0', 'n1')
+    if len(list) == 6:
+        try:
+            # w = s.graph[str(list[3])][str(list[4])]['weight']
+            pos1 = s.graph.nodes[str(list[3])]['pos']
+            pos1x = float(str(pos1).split(';')[0])
+            pos1y = float(str(pos1).split(';')[1])
+            pos2 = s.graph.nodes[str(list[4])]['pos']
+            pos2x = float(str(pos2).split(';')[0])
+            pos2y = float(str(pos2).split(';')[1])
+            dist = get_dist_between_two_points(pos1x, pos1y, pos2x, pos2y)
+            s.prop_d = float(dist)
+            # s.prop_m = ''.join(re.findall(r"[-+]?\d*\.\d+|\d+", str(list[5])))
+            if str(list[5])[-2].isdigit():
+                s.prop_m = str(list[5][:-1])
+                s.prop_m_suffix = str(list[5][-1])
+            else:
+                s.prop_m = str(list[5][:-2])
+                s.prop_m_suffix = str(list[5][-2]) + str(list[5][-1])
+            print('new distance proportion: ' + str(s.prop_d) + ' = ' + str(s.prop_m) + ' ' + str(s.prop_m_suffix))
         except Exception as e:
             print('Something went wrong while setting weight proportion')
     else:
@@ -153,7 +205,7 @@ def add_edge(raw_input: str):
     list = raw_input.split(' ')
     if len(list) == 5:
         if list[2] in s.graph.nodes and list[3] in s.graph.nodes:
-            s.graph.add_edge(list[2], list[3], weight=round(float(list[4]), 4))    #  list[4]
+            s.graph.add_edge(list[2], list[3], weight=round(float(list[4]), 4))  # list[4]
             s.successfulCommand = True
         else:
             print('abort adding edge, one of nodes is missing. (hint: command print nodes)')
@@ -195,13 +247,16 @@ def remove_node(raw_input: str):
     #    remove node x1
     list = raw_input.split(' ')
     if len(list) == 3:
-        s.graph.remove_node(list[2])
-        s.successfulCommand = True
+        try:
+            s.graph.remove_node(list[2])
+            s.successfulCommand = True
+        except Exception as e:
+            print('something went wrong when removing node, make sure it exists')
     else:
         print('Improper command caught in remove node: ' + raw_input)
 
 
-def remove_edge(raw_input: str): # remove0 edge1 u2 v3
+def remove_edge(raw_input: str):  # remove0 edge1 u2 v3
     #    remove node x1
     list = raw_input.split(' ')
     if len(list) == 4:
@@ -256,7 +311,7 @@ def print_list(raw_input):
     if 'edges' in raw_input:
         print(s.graph.edges)
         for e in s.graph.edges:
-            print(str(e)+' : '+str(s.graph.edges[e]['weight']))
+            print(str(e) + ' : ' + str(s.graph.edges[e]['weight']))
         #
         # labels = s.nx.get_edge_attributes(s.graph, 'weight')
         # print(labels)
@@ -315,7 +370,7 @@ def draw_graph():
             'Hard switch to planar. What is this draw style? ' + s.draw_style + '; Please define a valid one (see help).')
         pos = s.nx.planar_layout(s.graph)
 
-    print('position from generated pos ('+str(s.draw_style)+")")
+    print('position from generated pos (' + str(s.draw_style) + ")")
     print(pos)
     # for n in s.graph.nodes:
     #     print(str(s.graph.nodes[n]['pos']))
@@ -434,7 +489,7 @@ def release(event):
 
 def on_click(event):
     if event.dblclick:
-        print('doubleclick, doing ion + pause ')
+        print('doubleclick')
         # s.plt.ion()
         # s.plt.pause(0.01)
     if event.button:
@@ -449,9 +504,29 @@ def on_click(event):
             s.plt.show()
         if event.button == 2:
             print('inside middle')
-            # s.plt.show()
-            # s.plt.ion()
-            # s.plt.pause(0.001)
+            try:
+                for n in s.graph.nodes:
+                    npos = s.graph.nodes[n]['pos']
+                    nx = float(str(npos).split(';')[0])
+                    ny = float(str(npos).split(';')[1])
+                    if get_dist_between_two_points(round(float(event.xdata), 4), round(float(event.ydata), 4), nx,
+                                                   ny) <= 15:
+                        s.mouse_clicked_nodes.append(n)
+                        break
+                if len(s.mouse_clicked_nodes) >= 2:
+                    n1x = str(s.graph.nodes[str(s.mouse_clicked_nodes[0])]['pos']).split(';')[0]
+                    n1y = str(s.graph.nodes[str(s.mouse_clicked_nodes[0])]['pos']).split(';')[1]
+                    n2x = str(s.graph.nodes[str(s.mouse_clicked_nodes[1])]['pos']).split(';')[0]
+                    n2y = str(s.graph.nodes[str(s.mouse_clicked_nodes[1])]['pos']).split(';')[1]
+                    dist = get_dist_between_two_points(n1x, n1y, n2x, n2y)
+                    weight = float((float(s.prop_m) * float(dist)) / float(s.prop_d))
+                    add_edge('add edge '+str(s.mouse_clicked_nodes[0]) + ' ' + str(s.mouse_clicked_nodes[1]) + ' ' + str(weight))
+                    s.mouse_clicked_nodes.clear()
+                    draw_graph()
+                    s.plt.show()
+            except Exception as e:
+                print('something went wrong while creating edge with mouse')
+                print(e)
         if event.button == 1:
             print('mouse pos: ' + str(event.xdata) + ' ' + str(event.ydata))
 
