@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2021-04-11">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes class="node" mode="static">
+      <attribute id="0" title="color" type="string" />
+      <attribute id="1" title="name" type="string" />
+    </attributes>
+    <nodes>
+      <node id="a1" label="a1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a1" />
+        </attvalues>
+      </node>
+      <node id="a2" label="a2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="a2" />
+        </attvalues>
+      </node>
+      <node id="b1" label="b1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b1" />
+        </attvalues>
+      </node>
+      <node id="b2" label="b2">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="b2" />
+        </attvalues>
+      </node>
+      <node id="c1" label="c1">
+        <attvalues>
+          <attvalue for="0" value="red" />
+          <attvalue for="1" value="c1" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" source="a1" target="a2" weight="4" />
+      <edge id="1" source="a1" target="b1" weight="7" />
+      <edge id="2" source="a1" target="c1" weight="3" />
+      <edge id="3" source="a2" target="b2" weight="15" />
+      <edge id="4" source="a2" target="c1" weight="3" />
+      <edge id="5" source="b1" target="b2" weight="13" />
+      <edge id="6" source="b1" target="c1" weight="5" />
+    </edges>
+  </graph>
+</gexf>

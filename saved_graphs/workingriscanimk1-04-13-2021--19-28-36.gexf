@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2021-04-13">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes class="node" mode="static">
+      <attribute id="0" title="color" type="string" />
+      <attribute id="1" title="name" type="string" />
+      <attribute id="2" title="pos" type="string" />
+    </attributes>
+    <nodes>
+      <node id="n0" label="n0">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n0" />
+          <attvalue for="2" value="720.7903;549.471" />
+        </attvalues>
+      </node>
+      <node id="n1" label="n1">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n1" />
+          <attvalue for="2" value="691.1129;641.0839" />
+        </attvalues>
+      </node>
+      <node id="n2" label="n2">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n2" />
+          <attvalue for="2" value="813.6935;572.6968" />
+        </attvalues>
+      </node>
+      <node id="n3" label="n3">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n3" />
+          <attvalue for="2" value="825.3065;477.2129" />
+        </attvalues>
+      </node>
+      <node id="n4" label="n4">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n4" />
+          <attvalue for="2" value="625.3065;564.9548" />
+        </attvalues>
+      </node>
+      <node id="n5" label="n5">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n5" />
+          <attvalue for="2" value="660.1452;437.2129" />
+        </attvalues>
+      </node>
+      <node id="n6" label="n6">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n6" />
+          <attvalue for="2" value="744.0161;456.5677" />
+        </attvalues>
+      </node>
+      <node id="n7" label="n7">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n7" />
+          <attvalue for="2" value="687.2419;331.4065" />
+        </attvalues>
+      </node>
+      <node id="n8" label="n8">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n8" />
+          <attvalue for="2" value="768.5323;352.0516" />
+        </attvalues>
+      </node>
+      <node id="n9" label="n9">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n9" />
+          <attvalue for="2" value="791.7581;286.2452" />
+        </attvalues>
+      </node>
+      <node id="n10" label="n10">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n10" />
+          <attvalue for="2" value="705.3065;253.9871" />
+        </attvalues>
+      </node>
+      <node id="n11" label="n11">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n11" />
+          <attvalue for="2" value="869.1774;274.6323" />
+        </attvalues>
+      </node>
+      <node id="n12" label="n12">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n12" />
+          <attvalue for="2" value="858.8548;368.8258" />
+        </attvalues>
+      </node>
+      <node id="n13" label="n13">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n13" />
+          <attvalue for="2" value="786.5968;194.6323" />
+        </attvalues>
+      </node>
+      <node id="n14" label="n14">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n14" />
+          <attvalue for="2" value="861.4355;210.1161" />
+        </attvalues>
+      </node>
+      <node id="n15" label="n15">
+        <attvalues>
+          <attvalue for="0" value="yellow" />
+          <attvalue for="1" value="n15" />
+          <attvalue for="2" value="636.9194;233.3419" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" source="n0" target="n2" weight="3.0" />
+      <edge id="1" source="n0" target="n6" weight="5.0" />
+      <edge id="2" source="n0" target="n1" weight="6.0" />
+      <edge id="3" source="n0" target="n4" weight="6.0" />
+      <edge id="4" source="n1" target="n2" weight="8.0" />
+      <edge id="5" source="n2" target="n3" weight="5.0" />
+      <edge id="6" source="n3" target="n13" weight="999.0" />
+      <edge id="7" source="n3" target="n12" weight="6.0" />
+      <edge id="8" source="n3" target="n6" weight="5.0" />
+      <edge id="9" source="n4" target="n5" weight="7.0" />
+      <edge id="10" source="n5" target="n6" weight="6.0" />
+      <edge id="11" source="n5" target="n7" weight="6.0" />
+      <edge id="12" source="n6" target="n8" weight="5.0" />
+      <edge id="13" source="n7" target="n8" weight="6.0" />
+      <edge id="14" source="n7" target="n10" weight="4.0" />
+      <edge id="15" source="n8" target="n9" weight="3.0" />
+      <edge id="16" source="n8" target="n12" weight="5.0" />
+      <edge id="17" source="n9" target="n11" weight="4.0" />
+      <edge id="18" source="n9" target="n10" weight="0" />
+      <edge id="19" source="n9" target="n13" weight="5.0" />
+      <edge id="20" source="n10" target="n15" weight="4.0" />
+      <edge id="21" source="n11" target="n12" weight="6.0" />
+      <edge id="22" source="n11" target="n14" weight="3.0" />
+      <edge id="23" source="n13" target="n14" weight="4.0" />
+    </edges>
+  </graph>
+</gexf>
