@@ -7,6 +7,9 @@ from networkx.readwrite import json_graph
 from matplotlib.widgets import Button
 import math
 import re
+from os.path import abspath
+from os.path import basename
+from inspect import getsourcefile
 
 whileBool = True
 successfulCommand = False
@@ -16,15 +19,15 @@ requires_saving_json = False
 requires_saving_gexf = False
 draw_plot = True
 graph = nx.Graph()
-draw_style = 'planar'
+draw_style = 'none'
 filename = ''
 default_node_color = 'yellow'
 default_wh_color = 'green'
 generic_node_name = 'n'
 generic_node_name_counter = 0
 background_img = None
-fullscreen = False
-show_weight_labels = True
+fullscreen = True
+show_weight_labels = False
 # =========== proportion section =======================
 proportion = None
 default_edge_value = 'dist'
