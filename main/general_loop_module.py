@@ -170,7 +170,8 @@ def main_loop():
                 file_name = s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.png'
                 # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\images\\' + file_name
                 # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\' + file_name
-                file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                # file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                file_plus_path = str(s.getcwd()) + '\\' + file_name
                 s.plt.savefig(file_plus_path)
                 print(str(file_plus_path) + ' was saved.')
             if s.requires_saving_json:
@@ -179,7 +180,8 @@ def main_loop():
                 file_name = s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.json'
                 # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\saved_graphs\\' + file_name
                 # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\' + file_name
-                file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                # file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                file_plus_path = str(s.getcwd()) + '\\' + file_name
                 f = open(file_plus_path, 'a')
                 f.write(s.json.dumps(s.json_graph.node_link_data(s.graph)))
                 f.close()
@@ -189,7 +191,8 @@ def main_loop():
                 now = s.datetime.datetime.now()
                 file_name = s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.gexf'
                 # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\saved_graphs\\' + file_name
-                file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                # file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                file_plus_path = str(s.getcwd()) + '\\' + file_name
                 s.nx.write_gexf(s.graph, file_plus_path)
                 print(str(file_plus_path) + ' was saved.')
             # add bool to check for show or not
