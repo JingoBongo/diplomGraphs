@@ -74,7 +74,11 @@ def dum_dum_shmoys(wh_max_number, init_radius, f_node):
         if f_node is None or f_node == 'None':
             first_node = random.choice(all_nodes)
         else:
-            first_node = f_node
+            if f_node in s.graph.nodes:
+                first_node = f_node # there is no check if this node actually exists
+            else:
+                print('dum_dum_shmoys: invalid node name, picking random')
+                first_node = random.choice(all_nodes)
         # print('dum_dum_shmoys: start with node ' + str(first_node))
         all_warehouses.append(first_node)
         warehouse_current_number += 1

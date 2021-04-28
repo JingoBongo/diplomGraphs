@@ -429,7 +429,6 @@ def generate_custom_pos():
                 emptyDict[n] = [round(float(loc_arr[0]), 4), round(float(loc_arr[1]), 4)]
         except Exception as e:
             print(str(n) + ' has invalid position, using default layout(exception)')
-            print(str(n) + ' has invalid position, using default layout(exception)')
             s.draw_style = 'default'
             emptyDict = s.nx.planar_layout(s.graph)
             return emptyDict
