@@ -10,6 +10,8 @@ def process_raw_input(raw_input: str):
         dm.add_node(raw_input)
     elif 'show weights' in raw_input:
         dm.show_edge_weights(raw_input)
+    elif 'swap colors' in raw_input:
+        dm.swap_colors(raw_input)
     elif 'add pnode' in raw_input:
         dm.add_posed_node(raw_input)
     elif 'drawstyle' in raw_input and 'print' not in raw_input:
@@ -79,7 +81,7 @@ def process_raw_input(raw_input: str):
             dm.import_png(raw_input)
         else:
             print('What is the file format from command? I accept .png, .gexf and .json: ' + str(raw_input))
-    elif 'change node color' in raw_input:
+    elif 'set node color' in raw_input:
         dm.change_node_color(raw_input)
     # elif 'enable plot' in raw_input or 'disable plot' in raw_input:
     #     dm.plot_enabler(raw_input)
@@ -105,29 +107,48 @@ def process_raw_input(raw_input: str):
 
 def help():
     print('commands are:')
+    print('-===[ While canvas active: ]===-')
+    print('left mouse click on plot: print mouse position')
+    print('right mouse click on plot: create node at mouse position')
+    print('middle mouse click on 2 nodes sequentially: create edge between specified nodes')
+    print('CTRL + W: close canvas')
+    print('-===[ While terminal active: ]===-')
+    print('pause : pauses terminal and switches to canvas')
+    print('freeze : freezes canvas, leaving terminal active')
+    print('import [path(if not from .py/.exe file folder) + filename] ; I accept .png, .gexf and .json')
+    print('save image [image name] : saves just the image')
+    print('save json [file name] : saves graph')
+    print('save gexf [file name] : saves graph')
     print('add node [node_name] (possible node weight)')
+    print('add pnode [node_name] (possible node weight) [x coordinates] [y coordinates]')
     print('add edge [1st node name] [2nd node name] (possible edge weight)')
-    print('change node color [node name] [color]')
+    print('set node color [node name] [color]')
+    print('swap colors [color1] [color2] : replaces color1 with color2')
+    print('set edge weight [u] [v] [weight]')
+    print('set weight proportion [u] [v] [metric value] : sets distance between nodes to a specific metric '
+          'proportion; example: set weight proportion n1 n2 250km')
+    print('set npos [node_name] [x coordinates] [y coordinates]')
+    print('set edge weight [u] [v] [weight(pure value)]')
     print('remove node [node name]')
     print('remove edge [1st node name] [2nd node name]')
     if '.DiGraph' in str(type(s.graph)):
         print('add bidirectional edge [1st node name] [2nd node name] (possible edge weight)')
     print('reset plot')
+    print('fullscreen on/off')
+    print('show weights on/off')
+    print(
+        'drawstyle [style]. Acceptable styles are: planar/default, shell, spring, spectral, random, circular, none')
+    print('print nodes')
+    print('print edges')
+    print('print one [node_name]')
+    print('print style : to see current drawstyle')
     print('help')
-    print('print [type] ; Type could be nodes or edges')
-    print('save image [image name]')
-    print('save json [file name]')
-    print('save gexf [file name]')
-    print('import [path(if not from .py file folder) + filename] ; I accept .gexf and .json')
     print('floyd')
     print('shmoys [warehouse amount] [initial radius] [initial node name, use None for random]')
-    print(
-        'drawstyle [style]. Acceptable styles are: planar/default, shell, spring, spectral, random, circular')  # kamada_kawai, out temporarily
     print('exit')
 
 
 def main_loop():
-    # dm.init_plot()
     dm.gui()
     # I dont use DiGraphs now, so I cut it temporarily. I will still live this as a commands option
     # graph_type = input('Please specify graph type(graph/digraph): >>')
@@ -139,7 +160,6 @@ def main_loop():
         process_raw_input(raw_input)
         if s.successfulCommand:
             s.successfulCommand = False
-            # s.plt.clf()
             dm.draw_graph()
             s.plt.show()
             s.plt.ion()
@@ -148,25 +168,33 @@ def main_loop():
                 s.requires_saving = False
                 now = s.datetime.datetime.now()
                 file_name = s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.png'
-                file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\images\\' + file_name
+                # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\images\\' + file_name
+                # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\' + file_name
+                # file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                file_plus_path = str(s.getcwd()) + '\\' + file_name
                 s.plt.savefig(file_plus_path)
-                print(str(file_name) + ' was saved.')
+                print(str(file_plus_path) + ' was saved.')
             if s.requires_saving_json:
                 s.requires_saving_json = False
                 now = s.datetime.datetime.now()
                 file_name = s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.json'
-                file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\saved_graphs\\' + file_name
+                # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\saved_graphs\\' + file_name
+                # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\' + file_name
+                # file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                file_plus_path = str(s.getcwd()) + '\\' + file_name
                 f = open(file_plus_path, 'a')
                 f.write(s.json.dumps(s.json_graph.node_link_data(s.graph)))
                 f.close()
-                print(str(file_name) + ' was saved.')
+                print(str(file_plus_path) + ' was saved.')
             if s.requires_saving_gexf:
                 s.requires_saving_gexf = False
                 now = s.datetime.datetime.now()
                 file_name = s.filename + now.strftime("-%m-%d-%Y--%H-%M-%S") + '.gexf'
-                file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\saved_graphs\\' + file_name
+                # file_plus_path = str(s.pathlib.Path(__file__).parent.parent.absolute()) + '\\saved_graphs\\' + file_name
+                # file_plus_path = str(s.abspath(s.getsourcefile(lambda:0))).replace(s.basename(__file__), '') + file_name
+                file_plus_path = str(s.getcwd()) + '\\' + file_name
                 s.nx.write_gexf(s.graph, file_plus_path)
-                print(str(file_name) + ' was saved.')
+                print(str(file_plus_path) + ' was saved.')
             # add bool to check for show or not
             # print(s.draw_plot)
             # if s.draw_plot:
@@ -186,3 +214,4 @@ def main_loop():
         # elif 'init3' in raw_input:
         #     method_to_call = getattr(am, str(raw_input.split(' ')[1]))
         #     result = method_to_call(raw_input.split(' ')[2], raw_input.split(' ')[3], raw_input.split(' ')[4])
+

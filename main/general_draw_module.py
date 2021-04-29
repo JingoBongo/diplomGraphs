@@ -73,6 +73,17 @@ def show_edge_weights(raw_input: str):  # show0 weights1 on/off2
         print('Improper command caught in add node: ' + raw_input)
 
 
+def swap_colors(raw_input: str):  # swap0 colors1 colorone2 colortwo3
+    list = raw_input.split(' ')
+    if len(list) == 4:
+        for g in s.graph.nodes:
+            if s.graph.nodes[g]['color'] == str(list[2]):
+                s.graph.nodes[g]['color'] = str(list[3])
+        s.successfulCommand = True
+    else:
+        print('Improper command caught in swap colors: ' + raw_input)
+
+
 def add_posed_node(raw_input: str):
     list = raw_input.split(' ')
     if len(list) == 6:
@@ -219,12 +230,27 @@ def add_edge(raw_input: str):
         print('Improper command caught in add edge: ' + raw_input)
 
 
-def remove_edge(raw_input: str):
-    #    remove edge x1 x2
+# def remove_edge(raw_input: str): why do I have a copy.... old version of copy...*
+#     #    remove edge x1 x2
+#     list = raw_input.split(' ')
+#     if len(list) == 4:
+#         s.graph.remove_edge(list[2], list[3])
+#         s.successfulCommand = True
+#     else:
+#         print('Improper command caught in remove edge: ' + raw_input)
+#
+
+
+def remove_edge(raw_input: str):  # remove0 edge1 u2 v3
+    #    remove node x1
     list = raw_input.split(' ')
     if len(list) == 4:
-        s.graph.remove_edge(list[2], list[3])
-        s.successfulCommand = True
+        try:
+            s.graph.remove_edge(str(list[2]), str(list[3]))
+            s.successfulCommand = True
+        except Exception as e:
+            print(e)
+            print('Failed to remove edge')
     else:
         print('Improper command caught in remove edge: ' + raw_input)
 
@@ -238,9 +264,9 @@ def fullscreen(raw_input: str):
         elif 'off' == list[1]:
             s.fullscreen = False
         else:
-            print('Improper command caught in filscreen: ' + raw_input)
+            print('Improper command caught in fullscreen: ' + raw_input)
     else:
-        print('Improper command caught in filscreen: ' + raw_input)
+        print('Improper command caught in fullscreen: ' + raw_input)
 
 
 def remove_node(raw_input: str):
@@ -252,20 +278,6 @@ def remove_node(raw_input: str):
             s.successfulCommand = True
         except Exception as e:
             print('something went wrong when removing node, make sure it exists')
-    else:
-        print('Improper command caught in remove node: ' + raw_input)
-
-
-def remove_edge(raw_input: str):  # remove0 edge1 u2 v3
-    #    remove node x1
-    list = raw_input.split(' ')
-    if len(list) == 4:
-        try:
-            s.graph.remove_edge(str(list[2]), str(list[3]))
-            s.successfulCommand = True
-        except Exception as e:
-            print(e)
-            print('Failed to remove edge')
     else:
         print('Improper command caught in remove node: ' + raw_input)
 
@@ -335,6 +347,8 @@ def print_list(raw_input):
 def define_draw_style(raw_input):
     list = raw_input.split(' ')
     if len(list) == 2:
+        if list[1] == 'none':
+            print('Selected none drawstyle. Make sure to set up all node positions!')
         s.draw_style = list[1]
         s.successfulCommand = True
     else:
@@ -358,9 +372,10 @@ def draw_graph():
         pos = s.nx.spectral_layout(s.graph)
     elif s.draw_style == 'none':
         pos = generate_custom_pos()
-        print('Selected none drawstyle. Make sure to set up all node positions!')
+        # print('Selected none drawstyle. Make sure to set up all node positions!')
     elif s.draw_style == 'random':
         pos = s.nx.random_layout(s.graph)
+    # elif s.draw_style == 'kamada_kawai': # doesnt work right now, it needs distances (ex.: https://github.com/RasaHQ/whatlies/issues/9)
     # elif s.draw_style == 'kamada_kawai': # doesnt work right now, it needs distances (ex.: https://github.com/RasaHQ/whatlies/issues/9)
     #     pos = s.nx.kamada_kawai_layout(s.graph)
     elif s.draw_style == 'circular':
@@ -370,8 +385,8 @@ def draw_graph():
             'Hard switch to planar. What is this draw style? ' + s.draw_style + '; Please define a valid one (see help).')
         pos = s.nx.planar_layout(s.graph)
 
-    print('position from generated pos (' + str(s.draw_style) + ")")
-    print(pos)
+    # print('position from generated pos (' + str(s.draw_style) + ")")
+    # print(pos)
     # for n in s.graph.nodes:
     #     print(str(s.graph.nodes[n]['pos']))
     # print(pos)
@@ -380,7 +395,7 @@ def draw_graph():
 
     # if s.ax is None:
     #     s.fig, s.ax = s.plt.subplots()
-    s.graph.add_nodes_from(pos.keys())
+    # s.graph.add_nodes_from(pos.keys()) # why is it here? it represents nothing.
     s.nx.draw(s.graph, pos, node_color=colors)
     labels = s.nx.get_edge_attributes(s.graph, 'weight')
     nd_labels = s.nx.get_node_attributes(s.graph, 'name')
@@ -400,7 +415,7 @@ def draw_graph():
 
 def generate_custom_pos():
     emptyDict = {}
-    print('custom generation started')
+    # print('custom pos generation started')
     for n in s.graph.nodes:
         try:
             if s.graph.nodes[n]['pos'] == 'None' or s.graph.nodes[n]['pos'] is None:
@@ -414,23 +429,36 @@ def generate_custom_pos():
                 emptyDict[n] = [round(float(loc_arr[0]), 4), round(float(loc_arr[1]), 4)]
         except Exception as e:
             print(str(n) + ' has invalid position, using default layout(exception)')
-            print(str(n) + ' has invalid position, using default layout(exception)')
             s.draw_style = 'default'
             emptyDict = s.nx.planar_layout(s.graph)
             return emptyDict
-    print('result of custom generation:')
-    print(emptyDict)
+    # print('result of custom generation:')
+    # print(emptyDict)
     return emptyDict
+
+
+def find_next_generica_node_name_counter():
+    var = 0
+    for n in s.graph.nodes:
+        ncounter  = int(s.re.sub('[^0-9]', "", str(n)))
+        if ncounter > var:
+            var = ncounter
+    return var + 1
 
 
 def import_json(raw_input):
     list = raw_input.split(' ')
     if len(list) == 2:
         filename = list[1]
-        f = open(filename)
-        s.graph = s.json_graph.node_link_graph(s.json.load(f))
-        f.close()
-        s.successfulCommand = True
+        try:
+            f = open(filename)
+            s.graph = s.json_graph.node_link_graph(s.json.load(f))
+            f.close()
+            s.generic_node_name_counter = find_next_generica_node_name_counter()
+            s.successfulCommand = True
+        except Exception as e:
+            print('something went wrong while importing file '+str(filename))
+            print(e)
     else:
         print('Improper command caught in import json: ' + raw_input)
 
@@ -438,19 +466,28 @@ def import_json(raw_input):
 def import_png(raw_input):
     list = raw_input.split(' ')
     if len(list) == 2:
-        s.background_img = s.plt.imread(raw_input.split(' ')[1])
-        s.successfulCommand = True
-        s.background_is_image = True
+        try:
+            s.background_img = s.plt.imread(raw_input.split(' ')[1])
+            s.successfulCommand = True
+            s.background_is_image = True
+        except Exception as e:
+            print('something went wrong while importing file '+str(raw_input.split(' ')[1]))
+            print(e)
     else:
-        print('Improper command caught in import json: ' + raw_input)
+        print('Improper command caught in import png: ' + raw_input)
 
 
 def import_gexf(raw_input):
     list = raw_input.split(' ')
     if len(list) == 2:
         filename = list[1]
-        s.graph = s.nx.read_gexf(filename)
-        s.successfulCommand = True
+        try:
+            s.graph = s.nx.read_gexf(filename)
+            s.generic_node_name_counter = find_next_generica_node_name_counter()
+            s.successfulCommand = True
+        except Exception as e:
+            print('something went wrong while importing file '+str(filename))
+            print(e)
     else:
         print('Improper command caught in import gexf: ' + raw_input)
 
@@ -467,10 +504,6 @@ def change_node_color(raw_input):  # change0 node1 color2 [nodename]3 [color]4
         print('Improper command caught in change node color: ' + raw_input)
 
 
-# this part stands for making plot interactive, showing and pausing on demand
-def init_plot():
-    print('thats life')
-
 
 def gui():
     # plt.axis([0, 10, 1, 15])
@@ -482,9 +515,10 @@ def gui():
 
 
 def release(event):
-    print('press', event.key)
-    if event.key == 'x':
-        print('it was the X spot')
+    # print('press', event.key)
+    # if event.key == 'x':
+    #     print('it was the X spot')
+    pass
 
 
 def on_click(event):
@@ -503,7 +537,7 @@ def on_click(event):
             draw_graph()
             s.plt.show()
         if event.button == 2:
-            print('inside middle')
+            # print('inside middle')
             try:
                 for n in s.graph.nodes:
                     npos = s.graph.nodes[n]['pos']

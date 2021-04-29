@@ -1,11 +1,13 @@
-import networkx as nx
-import matplotlib.pyplot as plt
+from os.path import abspath
+from os.path import basename
+from inspect import getsourcefile
+import re
 
-G = nx.path_graph(4)  # or DiGraph, etc
-G.remove_edge(0, 1)
-# e = (1, 2)
-# G.remove_edge(*e)  # unpacks e from an edge tuple
-# e = (2, 3, {"weight": 7})  # an edge with attribute data
-# G.remove_edge(*e[:2])
-nx.draw(G, pos=nx.planar_layout(G))
-plt.show()
+# abspath(getsourcefile(lambda:0))
+# print(basename(__file__))
+# print(str(abspath(getsourcefile(lambda:0))).replace(basename(__file__),''))
+# print(abspath(getsourcefile(lambda:0)))
+
+a = ['[', '', '0.', '', '', '', '', '', '90.3687', '192.8256', '108.9082', '186.435', ']']
+result = re.findall(r"[-+]?\d*\.\d+|\d+", str(a[0]))[0]
+print(result)
