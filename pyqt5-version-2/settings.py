@@ -12,7 +12,6 @@ from os.path import basename
 from inspect import getsourcefile
 from os import getcwd
 
-
 whileBool = True
 successfulCommand = False
 requires_saving = False
@@ -33,7 +32,7 @@ show_weight_labels = False
 # =========== proportion section =======================
 proportion = None
 default_edge_value = 'dist'
-edge_value = 'dist' # another possibility : metric
+edge_value = 'dist'  # another possibility : metric
 prop_d = 1
 prop_m = 1
 prop_m_suffix = 'm'
@@ -45,5 +44,10 @@ distance_out_loud = False
 # experimental vars
 ax = None
 figure = None
-# app variables
-app = None
+
+
+def cust_print(self, message):
+    if not message:
+        message = 'error'
+    print(str(message))
+    self.console_output.append(str(message))
