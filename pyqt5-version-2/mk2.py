@@ -99,7 +99,7 @@ class PrettyWidget(QWidget):
         self.setLayout(grid)
 
         self.menubar = QMenuBar(self)
-        self.menubar.setFixedHeight(25)
+        self.menubar.setFixedHeight(35)
         grid.addWidget(self.menubar, 0, 0)
         # now THIS creates a menu btn File, but it does nothing y yet
         app_menu = self.menubar.addMenu('&App')

@@ -65,6 +65,14 @@ def dum_dum_shmoys_cycled(self, wh_max_number, init_radius, f_node, cycles):
         if float(el['rad']) <= float(local_best_rad):
             s.cust_print(self, ('cycled shmoys: With radius of '+ str(el['rad'])))
             s.cust_print(self, ('cycled shmoys: This nodes will work: '+str(el['wh'])))
+            for e in el['wh']:
+                try:
+                    s.graph.nodes[e]['color'] = s.default_wh_color
+                except Exception as e:
+                    s.cust_print(self, ('ycled shmoys: something went wrong while changing wh color'))
+    dm.draw_graph(self)
+
+
     local_results.clear()
 
 def dum_dum_shmoys_cycled_small(self, wh_max_number, init_radius, f_node):
