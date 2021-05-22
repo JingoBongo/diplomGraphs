@@ -131,6 +131,7 @@ def help(self):
     s.cust_print(self, ('floyd'))
     s.cust_print(self, ('shmoys [warehouse amount] [initial radius] [initial node name, use None for random]'))
     s.cust_print(self, ('cshmoys [warehouse amount] [initial radius] [initial node name, use None for random] [cycles]'))
+    s.cust_print(self, ('cls to clear the console output'))
     # s.cust_print(self, ('exit'))
 
 

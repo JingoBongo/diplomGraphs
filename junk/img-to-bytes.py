@@ -12,5 +12,5 @@ def stringtopng(converted_string):
     # decodeit.write(base64.b64decode((converted_string)))
     # decodeit.close()
     return base64.b64decode((converted_string))
-pngtostring('icon.png')
-pngtostring('exit.png')
+pngtostring('../pyqt5-version-2/icon.png')
+pngtostring('../pyqt5-version-2/exit.png')

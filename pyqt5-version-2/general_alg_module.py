@@ -4,6 +4,7 @@ import random
 import general_draw_module as dm
 
 
+
 nodes_in_radius = []
 last_working_result = []
 local_results = []
@@ -56,23 +57,23 @@ def dum_dum_shmoys_cycled(self, wh_max_number, init_radius, f_node, cycles):
     global local_results
     for i in range(int(cycles)):
         dum_dum_shmoys_cycled_small(self, wh_max_number, init_radius, f_node)
-    # local_results.append([last_working_radius, last_working_result])
     local_best_rad = 99999999999999999999999999999999999
     for result in local_results:
         if local_best_rad > float(result['rad']):
             local_best_rad = float(result['rad'])
+    for nd in s.graph.nodes:
+        s.graph.nodes[nd]['color'] = s.default_node_color
     for el in local_results:
         if float(el['rad']) <= float(local_best_rad):
             s.cust_print(self, ('cycled shmoys: With radius of '+ str(el['rad'])))
-            s.cust_print(self, ('cycled shmoys: This nodes will work: '+str(el['wh'])))
+            s.cust_print(self, ('cycled shmoys: These nodes will work: '+str(el['wh'])))
             for e in el['wh']:
                 try:
                     s.graph.nodes[e]['color'] = s.default_wh_color
                 except Exception as e:
                     s.cust_print(self, ('ycled shmoys: something went wrong while changing wh color'))
+            break
     dm.draw_graph(self)
-
-
     local_results.clear()
 
 def dum_dum_shmoys_cycled_small(self, wh_max_number, init_radius, f_node):
