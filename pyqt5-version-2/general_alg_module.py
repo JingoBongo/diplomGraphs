@@ -44,6 +44,8 @@ def dum_dum_floyd_alg(self):
         if summ == minimal_sum:
             min_sum_name = name
     s.cust_print(self, (min_sum_name + ' with a longest dist of ' + str(minimal_sum)))
+    for nd in s.graph.nodes:
+        s.graph.nodes[nd]['color'] = s.default_node_color
     s.graph.nodes[min_sum_name]['color'] = s.default_wh_color
     dm.draw_graph(self)
     s.successfulCommand = True
@@ -92,7 +94,7 @@ def dum_dum_shmoys_cycled_small(self, wh_max_number, init_radius, f_node):
             first_node = random.choice(all_nodes)
         else:
             if f_node in s.graph.nodes:
-                first_node = f_node  # there is no check if this node actually exists
+                first_node = f_node  # there is no check if this node actually exists, now it is
             else:
                 s.cust_print(self, ('dum_dum_shmoys: invalid node name, picking random'))
                 first_node = random.choice(all_nodes)
@@ -113,7 +115,7 @@ def dum_dum_shmoys_cycled_small(self, wh_max_number, init_radius, f_node):
     if len(all_nodes) > 0:
         new_radius = int(init_radius) + int(int(init_radius)) / 4
         if new_radius < last_working_radius:
-            dum_dum_shmoys_cycled_small(self, wh_max_number, new_radius, None)
+            dum_dum_shmoys_cycled_small(self, wh_max_number, new_radius, first_node)
         else:
             temp_dict = {'rad': last_working_radius, 'wh': list(last_working_result)}
             local_results.append(temp_dict)
@@ -130,7 +132,7 @@ def dum_dum_shmoys_cycled_small(self, wh_max_number, init_radius, f_node):
         last_working_result = all_warehouses
         last_working_radius = int(init_radius)
         new_radius = int(init_radius) - int(int(init_radius) / 32)
-        dum_dum_shmoys_cycled_small(self, wh_max_number, new_radius, None)
+        dum_dum_shmoys_cycled_small(self, wh_max_number, new_radius, first_node)
 
 
 def dum_dum_shmoys(self, wh_max_number, init_radius, f_node):
@@ -175,7 +177,7 @@ def dum_dum_shmoys(self, wh_max_number, init_radius, f_node):
         s.cust_print(self, ('dum_dum_shmoys: there are still nodes that are not covered by warehouses, incrementing radius ('+str(init_radius)+') by quarter and starting again'))
         new_radius = int(init_radius) + int(int(init_radius)) / 4
         if new_radius < last_working_radius:
-            dum_dum_shmoys(self, wh_max_number, new_radius, None)
+            dum_dum_shmoys(self, wh_max_number, new_radius, first_node)
         else:
             s.cust_print(self, ('dum_dum_shmoys: extended function execution failed, last successful radius = '+str(last_working_radius)))
             s.cust_print(self, ('dum_dum_shmoys: last successful placed warehouses: ' + str(last_working_result)))
@@ -193,7 +195,7 @@ def dum_dum_shmoys(self, wh_max_number, init_radius, f_node):
         last_working_radius = int(init_radius)
         new_radius = int(init_radius) - int(int(init_radius) / 32)
         s.cust_print(self, ('dum_dum_shmoys: starting recursion with lesser radius = '+str(new_radius)))
-        dum_dum_shmoys(self, wh_max_number, new_radius, None)
+        dum_dum_shmoys(self, wh_max_number, new_radius, first_node)
         # for nd in all_warehouses:
         #     s.graph.nodes[nd]['color'] = s.default_wh_color
         # s.successfulCommand = True
