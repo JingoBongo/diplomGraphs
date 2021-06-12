@@ -41,7 +41,6 @@ class PrettyWidget(QWidget):
         draw_graph_action.setShortcut('Ctrl+D')
         draw_graph_action.setStatusTip('Draw Graph')
         draw_graph_action.triggered.connect(lambda: dm.draw_graph(self))
-        # draw_graph_action.triggered.connect(lambda: self.draw_graph())
         return draw_graph_action
 
     def create_toggle_text_action(self):
@@ -63,7 +62,8 @@ class PrettyWidget(QWidget):
         action.setStatusTip(str(name))
         if shortcut:
             action.setShortcut(str(shortcut))
-        action.triggered.connect(lambda: self.create_generic_trigger_func(trigger_function, needs_arguments, name, description))
+        action.triggered.connect(
+            lambda: self.create_generic_trigger_func(trigger_function, needs_arguments, name, description))
         return action
 
     def create_generic_trigger_func(self, trigger_function, needs_arguments, name, description=None):
@@ -121,23 +121,32 @@ class PrettyWidget(QWidget):
         file_menu.addAction(self.create_generic_action('Save graph', 'save', True, '[json/gexf/image] [new file name]'))
         # graph menu has draw, add, set, swap, remove functios
         graph_menu.addAction(self.create_draw_graph_action())
-        graph_menu.addAction(self.create_generic_action('Add p-node', 'add pnode', True, '[nodename] [x coordinates] [y coordinates]'))
+        graph_menu.addAction(
+            self.create_generic_action('Add p-node', 'add pnode', True, '[nodename] [x coordinates] [y coordinates]'))
         graph_menu.addAction(self.create_generic_action('Add node', 'add node', True, '[nodename]'))
         graph_menu.addAction(self.create_generic_action('Add edge', 'add edge', True, '[node1] [node2] (weight)'))
-        graph_menu.addAction(self.create_generic_action('Set node color', 'set node color', True, '[nodename] [color] ; please use standard colors.'))
-        graph_menu.addAction(self.create_generic_action('Set node position', 'set npos', True, '[nodename] [x coordinates] [y coordinates]'))
-        graph_menu.addAction(self.create_generic_action('Set edge weight', 'set edge weight', True, '[node1] [node2] (weight)'))
+        graph_menu.addAction(self.create_generic_action('Set node color', 'set node color', True,
+                                                        '[nodename] [color] ; please use standard colors.'))
+        graph_menu.addAction(self.create_generic_action('Set node position', 'set npos', True,
+                                                        '[nodename] [x coordinates] [y coordinates]'))
+        graph_menu.addAction(
+            self.create_generic_action('Set edge weight', 'set edge weight', True, '[node1] [node2] (weight)'))
         graph_menu.addAction(self.create_generic_action('Swap colors', 'swap colors', True, '[color1] [color2]'))
         graph_menu.addAction(self.create_generic_action('Remove node', 'remove node', True, '[nodename]'))
         graph_menu.addAction(self.create_generic_action('Remove edge', 'remove edge', True, '[node1] [node2]'))
         # action menu has weight proportion, floyd, shmoys (+todo add cycles)... toggle?!...
         actions_menu.addAction(self.create_toggle_text_action())
         actions_menu.addAction(self.create_floyd_action())
-        actions_menu.addAction(self.create_generic_action('Shmoys Algorithm', 'shmoys', True, '[warehouse nr.] [starting radius] [starting node/None]', shortcut='Ctrl+S'))
-        actions_menu.addAction(self.create_generic_action('Cycled Shmoys Algorithm', 'cshmoys', True, '[warehouse nr.] [starting radius] [starting node/None] [cycles]'))
-        actions_menu.addAction(self.create_generic_action('Set weight proportion', 'set weight proportion', True, '[node1] [node2] [actual distance]'))
+        actions_menu.addAction(self.create_generic_action('Shmoys Algorithm', 'shmoys', True,
+                                                          '[warehouse nr.] [starting radius] [starting node/None]',
+                                                          shortcut='Ctrl+S'))
+        actions_menu.addAction(self.create_generic_action('Cycled Shmoys Algorithm', 'cshmoys', True,
+                                                          '[warehouse nr.] [starting radius] [starting node/None] [cycles]'))
+        actions_menu.addAction(self.create_generic_action('Set weight proportion', 'set weight proportion', True,
+                                                          '[node1] [node2] [actual distance]'))
         # utils menu. drawstyle, show weights,reset plot, prints, help, convert, get distances
-        utils_menu.addAction(self.create_generic_action('Set drawstyle', 'drawstyle', True, '[planar/shell/spring/spectral/random/circular/none(preferred)]'))
+        utils_menu.addAction(self.create_generic_action('Set drawstyle', 'drawstyle', True,
+                                                        '[planar/shell/spring/spectral/random/circular/none(preferred)]'))
         utils_menu.addAction(self.create_generic_action('Show edge weights', 'show weights', True, '[on/off]'))
         utils_menu.addAction(self.create_generic_action('Reset plot', 'reset plot', False, shortcut='Ctrl+R'))
         utils_menu.addAction(self.create_generic_action('Print node info', 'print one', True, '[nodename]'))
@@ -145,9 +154,11 @@ class PrettyWidget(QWidget):
         utils_menu.addAction(self.create_generic_action('Print edges info', 'print edges', False))
         utils_menu.addAction(self.create_generic_action('Print current drawstyle', 'print style', False))
         utils_menu.addAction(self.create_generic_action('Help (mostly for terminal)', 'help', False))
-        utils_menu.addAction(self.create_generic_action('Convert distances', 'convert', True, '[coord dist/metric] [value]; example: convert__ dist 500'))
+        utils_menu.addAction(self.create_generic_action('Convert distances', 'convert', True,
+                                                        '[coord dist/metric] [value]; example: convert__ dist 500'))
         # utils_menu.addAction(self.create_generic_action('Get distance between 2 points', 'get dist', True, '[x1 coordinates] [y1 coordinates] [x2 coordinates] [y2 coordinates]'))
-        utils_menu.addAction(self.create_generic_action('Get distance between 2 nodes', 'get node dist', True, '[node1] [node2]'))
+        utils_menu.addAction(
+            self.create_generic_action('Get distance between 2 nodes', 'get node dist', True, '[node1] [node2]'))
         # adding all the menus.
 
         self.figure = s.plt.figure()
@@ -169,10 +180,6 @@ class PrettyWidget(QWidget):
         self.console_output.setHidden(True)
 
         self.argtextbox.returnPressed.connect(self.on_enter_pressed_behavior)
-        # self.execute_button = QPushButton('Execute')
-        # self.execute_button.setObjectName('Execute')
-        # self.execute_button.clicked.connect(lambda: lm.process_raw_input())
-        # grid.addWidget(self.execute_button, 2, 1)
         self.show()
 
     def on_enter_pressed_behavior(self):
@@ -183,9 +190,6 @@ class PrettyWidget(QWidget):
         self.argtextbox.clear()
 
     def release(self, event):
-        # s.cust_print(self, 'press', event.key)
-        # if event.key == 'x':
-        #     s.cust_print(self, 'it was the X spot')
         pass
 
     def createVerticalGroupBox(self):
@@ -202,8 +206,6 @@ class PrettyWidget(QWidget):
 
     def submitCommand(self):
         eval('self.' + str(self.sender().objectName()) + '()')
-
-
 
     def center(self):
         qr = self.frameGeometry()

@@ -3,8 +3,6 @@ import re
 import random
 import general_draw_module as dm
 
-
-
 nodes_in_radius = []
 last_working_result = []
 local_results = []
@@ -67,8 +65,8 @@ def dum_dum_shmoys_cycled(self, wh_max_number, init_radius, f_node, cycles):
         s.graph.nodes[nd]['color'] = s.default_node_color
     for el in local_results:
         if float(el['rad']) <= float(local_best_rad):
-            s.cust_print(self, ('cycled shmoys: With radius of '+ str(el['rad'])))
-            s.cust_print(self, ('cycled shmoys: These nodes will work: '+str(el['wh'])))
+            s.cust_print(self, ('cycled shmoys: With radius of ' + str(el['rad'])))
+            s.cust_print(self, ('cycled shmoys: These nodes will work: ' + str(el['wh'])))
             for e in el['wh']:
                 try:
                     s.graph.nodes[e]['color'] = s.default_wh_color
@@ -77,6 +75,7 @@ def dum_dum_shmoys_cycled(self, wh_max_number, init_radius, f_node, cycles):
             break
     dm.draw_graph(self)
     local_results.clear()
+
 
 def dum_dum_shmoys_cycled_small(self, wh_max_number, init_radius, f_node):
     global last_working_result
@@ -136,6 +135,7 @@ def dum_dum_shmoys_cycled_small(self, wh_max_number, init_radius, f_node):
 
 
 def dum_dum_shmoys(self, wh_max_number, init_radius, f_node):
+    # from now on f_node will be a list of nodes or None. list ex.: (1,2,3)
     global last_working_result
     global last_working_radius
     warehouse_current_number = 0
@@ -149,7 +149,7 @@ def dum_dum_shmoys(self, wh_max_number, init_radius, f_node):
             first_node = random.choice(all_nodes)
         else:
             if f_node in s.graph.nodes:
-                first_node = f_node # there is no check if this node actually exists
+                first_node = f_node
             else:
                 s.cust_print(self, ('dum_dum_shmoys: invalid node name, picking random'))
                 first_node = random.choice(all_nodes)
@@ -174,12 +174,15 @@ def dum_dum_shmoys(self, wh_max_number, init_radius, f_node):
         if len(all_nodes) <= 0:
             break
     if len(all_nodes) > 0:
-        s.cust_print(self, ('dum_dum_shmoys: there are still nodes that are not covered by warehouses, incrementing radius ('+str(init_radius)+') by quarter and starting again'))
+        s.cust_print(self, (
+                    'dum_dum_shmoys: there are still nodes that are not covered by warehouses, incrementing radius (' + str(
+                init_radius) + ') by quarter and starting again'))
         new_radius = int(init_radius) + int(int(init_radius)) / 4
         if new_radius < last_working_radius:
             dum_dum_shmoys(self, wh_max_number, new_radius, first_node)
         else:
-            s.cust_print(self, ('dum_dum_shmoys: extended function execution failed, last successful radius = '+str(last_working_radius)))
+            s.cust_print(self, ('dum_dum_shmoys: extended function execution failed, last successful radius = ' + str(
+                last_working_radius)))
             s.cust_print(self, ('dum_dum_shmoys: last successful placed warehouses: ' + str(last_working_result)))
             for nd in s.graph.nodes:
                 s.graph.nodes[nd]['color'] = s.default_node_color
@@ -190,11 +193,11 @@ def dum_dum_shmoys(self, wh_max_number, init_radius, f_node):
             s.successfulCommand = True
     else:
         s.cust_print(self, ('dum_dum_shmoys: function execution completed with radius = ' + str(init_radius)))
-        s.cust_print(self, ('dum_dum_shmoys: placed warehouses: '+str(all_warehouses)))
+        s.cust_print(self, ('dum_dum_shmoys: placed warehouses: ' + str(all_warehouses)))
         last_working_result = all_warehouses
         last_working_radius = int(init_radius)
         new_radius = int(init_radius) - int(int(init_radius) / 32)
-        s.cust_print(self, ('dum_dum_shmoys: starting recursion with lesser radius = '+str(new_radius)))
+        s.cust_print(self, ('dum_dum_shmoys: starting recursion with lesser radius = ' + str(new_radius)))
         dum_dum_shmoys(self, wh_max_number, new_radius, first_node)
         # for nd in all_warehouses:
         #     s.graph.nodes[nd]['color'] = s.default_wh_color
@@ -230,19 +233,6 @@ def recursive_search(nodename, initial_weight, radius):
         else:
             # s.cust_print(self, 'recursive_search: ending point of edge ' + str(r) + ' is out of reach')
             pass
-
-
-# def extract_nodes_from_str(string: str):
-#     arr = string.split('),')
-#     arr2 = []
-#     for n in arr:
-#         n1 = n.split('\'')[1]
-#         n2 = n.split('\'')[3]
-#         if n2 not in arr2:
-#             arr2.append(n2)
-#         if n1 not in arr2:
-#             arr2.append(n1)
-#     return arr2
 
 
 def extract_edges_from_str(string: str):
