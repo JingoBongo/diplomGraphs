@@ -138,10 +138,10 @@ class PrettyWidget(QWidget):
         actions_menu.addAction(self.create_toggle_text_action())
         actions_menu.addAction(self.create_floyd_action())
         actions_menu.addAction(self.create_generic_action('Shmoys Algorithm', 'shmoys', True,
-                                                          '[warehouse nr.] [starting radius] [starting node/None]',
+                                                          '[warehouse nr.] [starting radius] [(node1,node2))/None]',
                                                           shortcut='Ctrl+S'))
         actions_menu.addAction(self.create_generic_action('Cycled Shmoys Algorithm', 'cshmoys', True,
-                                                          '[warehouse nr.] [starting radius] [starting node/None] [cycles]'))
+                                                          '[warehouse nr.] [starting radius] [(node1,node2))/None] [cycles]', shortcut='Ctrl+E'))
         actions_menu.addAction(self.create_generic_action('Set weight proportion', 'set weight proportion', True,
                                                           '[node1] [node2] [actual distance]'))
         # utils menu. drawstyle, show weights,reset plot, prints, help, convert, get distances
@@ -153,7 +153,7 @@ class PrettyWidget(QWidget):
         utils_menu.addAction(self.create_generic_action('Print nodes info', 'print nodes', False))
         utils_menu.addAction(self.create_generic_action('Print edges info', 'print edges', False))
         utils_menu.addAction(self.create_generic_action('Print current drawstyle', 'print style', False))
-        utils_menu.addAction(self.create_generic_action('Help (mostly for terminal)', 'help', False))
+        utils_menu.addAction(self.create_generic_action('Help (output in console, Ctrl+O)', 'help', False))
         utils_menu.addAction(self.create_generic_action('Convert distances', 'convert', True,
                                                         '[coord dist/metric] [value]; example: convert__ dist 500'))
         # utils_menu.addAction(self.create_generic_action('Get distance between 2 points', 'get dist', True, '[x1 coordinates] [y1 coordinates] [x2 coordinates] [y2 coordinates]'))
