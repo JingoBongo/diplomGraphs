@@ -27,7 +27,6 @@ def dum_dum_floyd_alg(self):
         x = i.strip().split(" ")
         one_d_arr = []
         for xi in x:
-            # xi = re.sub("[^0-9]", "", xi)
             xi = re.findall(r"[-+]?\d*\.\d+|\d+", str(xi))
             if len(xi) > 0:
                 one_d_arr.append(float(xi[0]))

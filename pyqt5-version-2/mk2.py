@@ -169,10 +169,6 @@ class PrettyWidget(QWidget):
         self.console_output.setHidden(True)
 
         self.argtextbox.returnPressed.connect(self.on_enter_pressed_behavior)
-        # self.execute_button = QPushButton('Execute')
-        # self.execute_button.setObjectName('Execute')
-        # self.execute_button.clicked.connect(lambda: lm.process_raw_input())
-        # grid.addWidget(self.execute_button, 2, 1)
         self.show()
 
     def on_enter_pressed_behavior(self):
